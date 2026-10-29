@@ -13,9 +13,7 @@
 ## Quick run
 ```bash
 cd automation
-python3 log_analyzer.py --log sample_data/auth.log --year 2026 \
-  --users sample_data/system_users.csv --approved sample_data/approved_users.csv \
-  --today 2026-10-29 --out reports
+python3 log_analyzer.py --log sample_data/auth.log --year 2026 --users sample_data/system_users.csv --approved sample_data/approved_users.csv --today 2026-10-29 --out reports
 python3 -m unittest discover -s tests -v      # 18 tests
 ```
 Exit code 1 on the sample data is expected (SEV-1/SEV-2 findings present); 2 = input error; 3 = internal error. See `automation/README.md`.
