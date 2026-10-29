@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "generated": "2026-10-29 23:00",
+    "log": "sample_data/auth.log",
+    "total": 19,
+    "events": 18,
+    "retention_days": 90,
+    "purged_rows": 0
+  },
+  "severity_counts": {
+    "SEV-2": 5,
+    "SEV-3": 3,
+    "SEV-4": 3
+  },
+  "findings": [
+    {
+      "severity": "SEV-2",
+      "category": "Successful login after brute force",
+      "detail": "User 'ubuntu' logged in from 203.0.113.45 at 2026-10-28 02:14:22 after 6 failed attempts",
+      "action": "Disable account, force password reset, isolate host, escalate to Security lead"
+    },
+    {
+      "severity": "SEV-2",
+      "category": "Privileged group change",
+      "detail": "'tempsvc' added to group 'sudo' at 2026-10-28 11:20:05",
+      "action": "Verify approval; revert if unauthorised"
+    },
+    {
+      "severity": "SEV-2",
+      "category": "Excess privileges",
+      "detail": "'bob' is in unapproved group(s): sudo",
+      "action": "Remove membership or document approved exception"
+    },
+    {
+      "severity": "SEV-2",
+      "category": "Unapproved account",
+      "detail": "'ubuntu' exists (active) but is not on the approved list",
+      "action": "Disable and investigate; confirm ticket"
+    },
+    {
+      "severity": "SEV-2",
+      "category": "Unapproved account",
+      "detail": "'tempsvc' exists (active) but is not on the approved list",
+      "action": "Disable and investigate; confirm ticket"
+    },
+    {
+      "severity": "SEV-3",
+      "category": "Brute-force attempt",
+      "detail": "6 failed attempts from 203.0.113.45 within 17 s (02:14:01-02:14:18)",
+      "action": "Block IP at firewall / fail2ban; review targeted accounts"
+    },
+    {
+      "severity": "SEV-3",
+      "category": "sudo failure",
+      "detail": "User 'bob' had incorrect sudo password attempts at 10:01:03",
+      "action": "Confirm with user; check for account misuse"
+    },
+    {
+      "severity": "SEV-3",
+      "category": "New account created",
+      "detail": "Account 'tempsvc' created at 2026-10-28 11:20:00",
+      "action": "Verify a ticket/approval exists"
+    },
+    {
+      "severity": "SEV-4",
+      "category": "Root login attempts",
+      "detail": "2 failed root logins; ensure PermitRootLogin no",
+      "action": "Verify sshd_config hardening"
+    },
+    {
+      "severity": "SEV-4",
+      "category": "Dormant account",
+      "detail": "'dave' has not logged in for 150 days",
+      "action": "Disable per quarterly review"
+    },
+    {
+      "severity": "SEV-4",
+      "category": "Approved user missing",
+      "detail": "'erin' is approved but has no account",
+      "action": "Check onboarding ticket"
+    }
+  ]
+}

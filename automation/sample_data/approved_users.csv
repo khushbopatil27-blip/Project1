@@ -1,0 +1,6 @@
+username,allowed_groups
+alice,sudo;developers
+bob,developers
+carol,developers
+dave,developers
+erin,developers

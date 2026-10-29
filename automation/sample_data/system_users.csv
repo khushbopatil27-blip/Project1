@@ -1,0 +1,7 @@
+username,groups,status,last_login
+alice,sudo;developers,active,2026-10-28
+bob,developers;sudo,active,2026-10-28
+carol,developers,active,2026-10-28
+dave,developers,active,2026-06-01
+ubuntu,sudo,active,2026-10-28
+tempsvc,sudo,active,2026-10-28

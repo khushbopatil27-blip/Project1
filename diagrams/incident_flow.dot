@@ -1,0 +1,18 @@
+digraph G {
+  rankdir=TB; nodesep=0.35; ranksep=0.32; dpi=130;
+  node [shape=box, style="rounded,filled", fillcolor="#E9EFF7", color="#1F3A5F", fontname="Helvetica", fontsize=11];
+  edge [color="#1F3A5F", fontname="Helvetica", fontsize=10];
+  det [label="DETECTION\ndaily log report (exit code 1), user report,\nantivirus alert, audit", fillcolor="#1F3A5F", fontcolor=white];
+  tri [label="1. TRIAGE (Security analyst, within 15 min)\ntrue incident or false positive?"];
+  fp [label="False positive:\ndocument and close", fillcolor="#D4EDDA", color="#3C763D"];
+  cls [label="2. CLASSIFY SEVERITY\nSEV-1 critical | SEV-2 high | SEV-3 medium | SEV-4 low"];
+  con [label="3. CONTAIN\nisolate host / disable account / block IP\n(preserve evidence, do not wipe)"];
+  not [label="4. NOTIFY / ESCALATE per severity matrix\nSEV-1: Security lead -> IT Ops Manager -> Sponsor (+ DPO/legal)\nSEV-2: Security lead, IT Ops Manager (1 h)\nSEV-3: Security analyst, sysadmin (4 h)\nSEV-4: service desk ticket (next business day)", fillcolor="#FFF3CD", color="#B58900"];
+  rec [label="5. ERADICATE & RECOVER\nremove cause, patch, restore clean backup, reset credentials"];
+  ver [label="6. VERIFY\nmonitor 48-72 h, confirm normal"];
+  pir [label="7. POST-INCIDENT REVIEW (within 5 business days)\ntimeline, root cause, actions, baseline update", fillcolor="#D4EDDA", color="#3C763D"];
+  det -> tri;
+  tri -> fp [label="false"];
+  tri -> cls [label="true"];
+  cls -> con -> not -> rec -> ver -> pir;
+}

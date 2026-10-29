@@ -1,0 +1,29 @@
+digraph G {
+  rankdir=TB; nodesep=0.35; ranksep=0.35; dpi=130;
+  node [shape=box, style="rounded,filled", fillcolor="#E9EFF7", color="#1F3A5F", fontname="Helvetica", fontsize=11];
+  edge [color="#1F3A5F", fontname="Helvetica", fontsize=10];
+  start [label="User reports issue\n(portal / email / phone)", fillcolor="#1F3A5F", fontcolor=white];
+  log [label="1. LOG TICKET\nunique ID, reporter, description"];
+  triage [label="2. TRIAGE (Service desk, L1)\ncategory + priority P1-P4"];
+  sec [label="Security indicators\npresent?", shape=diamond, fillcolor="#FFF3CD", color="#B58900"];
+  inc [label="SECURITY INCIDENT\nESCALATION WORKFLOW", fillcolor="#F8D7DA", color="#A94442"];
+  assign [label="3. ASSIGN OWNER, START SLA CLOCK\nowner field set; SLA due time recorded"];
+  l1 [label="4. L1 RESOLUTION\nknowledge base / runbook"];
+  r1 [label="Resolved?", shape=diamond, fillcolor="#FFF3CD", color="#B58900"];
+  l2 [label="5. L2 (Sysadmin / specialist)\nre-assign owner; deeper diagnosis"];
+  r2 [label="Resolved?", shape=diamond, fillcolor="#FFF3CD", color="#B58900"];
+  l3 [label="6. L3 (senior engineer / vendor / manager)\nroot cause, vendor case, change request"];
+  confirm [label="7. CONFIRM WITH USER\nuser accepts, or 3 business days\nwithout reply after 2 reminders"];
+  close [label="8. CLOSE\nroot cause + KB article (P1/P2),\ntime logged, owner signs off", fillcolor="#D4EDDA", color="#3C763D"];
+  start -> log -> triage -> sec;
+  sec -> inc [label="yes"];
+  sec -> assign [label="no"];
+  assign -> l1 -> r1;
+  r1 -> confirm [label="yes"];
+  r1 -> l2 [label="no, or 50% of\nSLA used"];
+  l2 -> r2;
+  r2 -> confirm [label="yes"];
+  r2 -> l3 [label="no"];
+  l3 -> confirm;
+  confirm -> close;
+}
